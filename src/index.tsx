@@ -1,8 +1,16 @@
 import App from "@components/App";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 
-createRoot(document.getElementById("root")!).render(
+const rootElement: HTMLElement | null = document.getElementById("root");
+
+if (!rootElement) {
+    throw new Error("Cannot acquire #root element, Aborting...");
+}
+
+const reactRoot: Root = createRoot(rootElement);
+
+reactRoot.render(
     <StrictMode>
         <App />
     </StrictMode>
